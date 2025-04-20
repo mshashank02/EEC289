@@ -12,7 +12,7 @@ imgs = raw.data.float().numpy() / 255.0  # normalized to [0,1]
 labels = raw.targets.numpy()
 
 # Load saved cluster centers for K=5000
-centers_5000 = np.load("outputs/kmeans_centers_5000.npy")
+centers_10000 = np.load("outputs/kmeans_centers_10000.npy")
 
 # Create mock KMeans object with cluster_centers_
 class DummyKMeans:
@@ -22,7 +22,7 @@ class DummyKMeans:
     def predict(self, X):
         return pairwise_distances_argmin(X, self.cluster_centers_)
 
-kmeans = DummyKMeans(centers_5000)
+kmeans = DummyKMeans(centers_10000)
 
 # Reconstruction function
 def reconstruct_image(img, kmeans, patch_size=5):
@@ -64,5 +64,5 @@ for i, idx in enumerate(digit_indices):
 
 plt.tight_layout()
 os.makedirs("outputs", exist_ok=True)
-plt.savefig("outputs/reconstructed_digits_0_to_9_k5000.png")
+plt.savefig("outputs/reconstructed_digits_0_to_9_k10000.png")
 plt.show()
