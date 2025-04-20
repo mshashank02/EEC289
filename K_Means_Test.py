@@ -44,13 +44,16 @@ k = 5000
 kmeans = KMeans(n_clusters=k)
 kmeans.fit(patches)
 
-fig, axes = plt.subplots(10, 10, figsize=(10, 10))
+np.save("outputs/kmeans_centers_5000.npy", kmeans.cluster_centers_)
+np.savetxt("outputs/kmeans_centers_5000.csv", kmeans.cluster_centers_, delimiter=",")
+
+fig, axes = plt.subplots(100, 50, figsize=(10, 10))
 for i, ax in enumerate(axes.flat):
     ax.imshow(kmeans.cluster_centers_[i].reshape(5, 5), cmap='gray')
     ax.axis('off')
 os.makedirs("outputs", exist_ok=True)
-plt.suptitle("K-means Cluster Centers of 5x5 MNIST Patches")
-plt.savefig("outputs/kmeans_patch_clusters_5000_actual.png")
+plt.suptitle("K-means Cluster Centers k=5000 of 5x5 MNIST Patches")
+plt.savefig("outputs/kmeans_patch_clusters_5000_final.png")
 plt.show()
 from sklearn.metrics import pairwise_distances_argmin_min
 
@@ -59,21 +62,25 @@ closest_indices, distances = pairwise_distances_argmin_min(patches, kmeans.clust
 average_distance = distances.mean()
 print(f"Average Euclidean distance to cluster centers 5000: {average_distance:.4f}")
 
-k = 1000
+
+k = 10000
 kmeans = KMeans(n_clusters=k)
 kmeans.fit(patches)
 
-fig, axes = plt.subplots(20, 25, figsize=(10, 10))
+np.save("outputs/kmeans_centers_10000.npy", kmeans.cluster_centers_)
+np.savetxt("outputs/kmeans_centers_10000.csv", kmeans.cluster_centers_, delimiter=",")
+
+fig, axes = plt.subplots(100, 100, figsize=(10, 10))
 for i, ax in enumerate(axes.flat):
      ax.imshow(kmeans.cluster_centers_[i].reshape(5, 5), cmap='gray')
      ax.axis('off')
-plt.suptitle("K-means Cluster Centers of 5x5 MNIST Patches")
-plt.savefig("outputs/kmeans_patch_clusters_1000.png")
+plt.suptitle("K-means Cluster Centers k=10000 of 5x5 MNIST Patches")
+plt.savefig("outputs/kmeans_patch_clusters_10000_final.png")
 plt.show()
 
 closest_indices, distances = pairwise_distances_argmin_min(patches, kmeans.cluster_centers_)
 
 average_distance = distances.mean()
-print(f"Average Euclidean distance to cluster centers 1000: {average_distance:.4f}")
+print(f"Average Euclidean distance to cluster centers 10000: {average_distance:.4f}")
 
 
