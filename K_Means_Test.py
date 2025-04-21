@@ -40,7 +40,7 @@ def extract_patches(images, patch_size=5):
 
 patches = extract_patches(images, patch_size=5)
 
-k = 1000
+k = 1000 #Change k value from [10, 10000] for the experiments
 kmeans = KMeans(n_clusters=k)
 kmeans.fit(patches)
 

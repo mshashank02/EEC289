@@ -12,7 +12,7 @@ imgs = raw.data.float().numpy() / 255.0  # normalized to [0,1]
 labels = raw.targets.numpy()
 
 # Load saved cluster centers for K=5000
-centers_10000 = np.load("outputs/kmeans_centers_10000.npy")
+centers_10000 = np.load("outputs/kmeans_centers_10000.npy") #Load appropriate cluster file for reconstruction 
 
 # Create mock KMeans object with cluster_centers_
 class DummyKMeans:
